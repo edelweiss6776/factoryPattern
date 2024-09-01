@@ -1,31 +1,37 @@
 package factoryPattern;
 
 public class PetRecord {
-    private String petId;
-    private String petName;
-    private Pet pet;
+    private String animalID;
+    private String animalName;
+    private Animal animal;
 
-    public String getPetId() {
-        return petId;
+    public AnimalProfile(String animalID, String animalName, Animal animal) {
+        this.animalID = animalID;
+        this.animalName = animalName;
+        this.animal = animal;
     }
 
-    public void setPetId(String petId) {
-        this.petId = petId;
+    public String getAnimalID() {
+        return animalID;
     }
 
-    public String getPetName() {
-        return petName;
+    public String getAnimalName() {
+        return animalName;
     }
 
-    public void setPetName(String petName) {
-        this.petName = petName;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void displayDetails() {
+        System.out.println("Animal ID: " + animalID);
+        System.out.println("Animal Name: " + animalName);
+        animal.makeNoise();
+        animal.performActivity();
+        if (animal instanceof Canine) {
+            System.out.println("Breed: " + ((Canine) animal).getType());
+        } else if (animal instanceof Feline) {
+            System.out.println("Lives Left: " + ((Feline) animal).getLivesLeft());
+        }
     }
 }
