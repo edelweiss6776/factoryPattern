@@ -1,22 +1,23 @@
 package factoryPattern;
 
-public class Dog implements Pet {
-    private String breed;
+public class Dog implements Pet{
+    private String type;
 
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-    @Override
-    public String makeSound() {
-        return "Aw, aw!";
+    public Canine(String type) {
+        this.type = type;
     }
 
     @Override
-    public String play() {
-        return "Catching objects that you throw!";
+    public void makeNoise() {
+        System.out.println("Bark! Bark!");
+    }
+
+    @Override
+    public void performActivity() {
+        System.out.println("The canine is fetching a stick.");
+    }
+
+    public String getType() {
+        return type;
     }
 }
