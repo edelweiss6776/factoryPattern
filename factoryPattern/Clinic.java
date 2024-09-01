@@ -3,37 +3,58 @@ package factoryPattern;
 import java.util.Scanner;
 
 public class Clinic {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean keepRunning = true;
 
-        Scanner input = new Scanner(System.in);
+        while (keepRunning) {
+            System.out.println("Select an option:");
+            System.out.println("1. Create and display Canine (Dog)");
+            System.out.println("2. Create and display Feline (Cat)");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Dog's ID: ");
+                    String dogID = scanner.nextLine();
+                    System.out.print("Enter Dog's Name: ");
+                    String dogName = scanner.nextLine();
+                    System.out.print("Enter Dog's Breed: ");
+                    String dogBreed = scanner.nextLine();
 
-        System.out.println("[1] Dog");
-        System.out.println("[2] Cat");
-        System.out.print("\nChoose your pet number: ");
-        Integer choice = input.nextInt();
+                    Animal dog = new Canine(dogBreed);
+                    AnimalProfile dogProfile = new AnimalProfile(dogID, dogName, dog);
+                    dogProfile.displayDetails();
+                    break;
 
-        PetRecord petFile = new PetRecord();
-        Pet pet;
+                case 2:
+                    System.out.print("Enter Cat's ID: ");
+                    String catID = scanner.nextLine();
+                    System.out.print("Enter Cat's Name: ");
+                    String catName = scanner.nextLine();
+                    System.out.print("Enter Cat's Lives Left: ");
+                    int catLivesLeft = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
 
-        switch(choice){
-            case 1: pet = new Dog();
-                petFile.setPetId("D01");
-                petFile.setPetName("Bantay");
-                petFile.setPet(pet);
-                ((Dog) pet).setBreed("German Shepperd");
-                break;
-            case 2: pet = new Cat();
-                petFile.setPetId("C01");
-                petFile.setPetName("Muning");
-                petFile.setPet(pet);
-                ((Cat) pet).setNoOfLives(9);
+                    Animal cat = new Feline(catLivesLeft);
+                    AnimalProfile catProfile = new AnimalProfile(catID, catName, cat);
+                    catProfile.displayDetails();
+                    break;
+
+                case 3:
+                    keepRunning = false;
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+
+            System.out.println();  
         }
 
-        System.out.println("Pet id is " + petFile.getPetId());
-        System.out.println("Pet name is " + petFile.getPetName());
-        System.out.println("Pet kind: " + petFile.getPet().getClass().getSimpleName());
-        System.out.println("Communication sound: "+ petFile.getPet().makeSound());
-        System.out.println("Play mode: " + petFile.getPet().play());
-
+        scanner.close();
     }
 }
